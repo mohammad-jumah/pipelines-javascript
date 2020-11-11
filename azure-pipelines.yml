@@ -21,7 +21,8 @@ steps:
     npm test
   displayName: 'npm install and build'
   
-#- task: Npm@1
-#  inputs:
-#    command: 'install'
-#- script: npm install --only=dev
+- task: PublishTestResults@2
+  condition: succeedOrFailed()
+  inputs:
+    testRunner: JUnit
+    testResultsFiles: '**/TEST-RESULTS.xml'
